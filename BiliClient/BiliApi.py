@@ -22,7 +22,7 @@ class BiliApi(object):
         #设置header
         self._session.headers.update(
             {
-                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/63.0.3239.108",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
                 "Referer": "https://www.bilibili.com/",
                 'Connection': 'keep-alive'
              }
@@ -1515,3 +1515,9 @@ class BiliApi(object):
 
     def __del__(self):
         self._session.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
